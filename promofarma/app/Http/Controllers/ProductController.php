@@ -74,26 +74,17 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Model\Product $product
+     * @return array
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+
+        return $request->all();
     }
 
     /**
