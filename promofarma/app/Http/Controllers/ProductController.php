@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ProductNotBelongsToUser;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Model\Product;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -15,10 +17,11 @@ class ProductController extends Controller
     {
         $this->middleware('auth:api')->except('index', 'show');
     }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -28,7 +31,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
@@ -65,8 +68,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  \App\Model\Product $product
+     * @return ProductResource
      */
     public function show(Product $product)
     {
@@ -82,9 +85,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->ProductOwnerCheck($product);
+
         $product->update($request->all());
 
-        return $request->all();
+        return response([
+            'data' => new ProductResource($product)
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -96,8 +103,17 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->ProductOwnerCheck($product);
+
         $product->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function ProductOwnerCheck(Product $product)
+    {
+        if(Auth::id() != $product->user_id) {
+            throw new ProductNotBelongsToUser;
+        }
     }
 }
