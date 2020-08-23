@@ -82,6 +82,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Model\Product $product
      * @return array
+     * @throws ProductNotBelongsToUser
      */
     public function update(Request $request, Product $product)
     {

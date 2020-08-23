@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CartItemCollection extends ResourceCollection
 {
+    public $collects = 'App\Http\Resources\CartItemResource';
+
     /**
      * Transform the resource collection into an array.
      *
@@ -14,6 +16,6 @@ class CartItemCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return $this->collection;
     }
 }

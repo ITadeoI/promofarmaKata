@@ -22,7 +22,7 @@ class CreateCartItemsTable extends Migration
 
             $table->unsignedInteger('quantity');
 
-            $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
+            $table->foreign('cart_id')->references('cart_id')->on('carts')->onDelete('cascade');
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Cart\CartItemCollection;
+use App\Http\Resources\Cart\CartItemResource;
 use App\Model\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -30,7 +33,7 @@ class CartController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Cart in storage and return the data.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -42,14 +45,14 @@ class CartController extends Controller
         }
 
         $cart = Cart::create([
-            'id' => md5(uniqid(rand(), true)),
+            'cart_id' => md5(uniqid(rand(), true)),
             'key' => md5(uniqid(rand(), true)),
-            'user_id' => md5(uniqid(rand(), true)),
+            'user_id' => isset($userID) ? $userID : null
         ]);
 
         return response()->json([
             'data' => 'A new cart have been created for you!',
-            'cartToken' => $cart->id,
+            'cartId' => $cart->cart_id,
             'cartKey' => $cart->key,
         ],Response::HTTP_CREATED);
     }
@@ -60,9 +63,32 @@ class CartController extends Controller
      * @param  \App\Model\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function show(Cart $cart, Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'cartKey' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return \response()->json([
+                'errors' => $validator->errors(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $cartKey = $request->input('cartKey');
+
+        if($cart->key == $cartKey) {
+
+            return response()->json([
+                'cart' => $cart->cart_id,
+                'Items in Cart' => new CartItemCollection($cart->items),
+            ],Response::HTTP_OK);
+        }
+
+        return response()->json([
+            'data' => 'CartKey provided is incorrect'
+        ],Response::HTTP_BAD_REQUEST);
+
     }
 
     /**
@@ -91,11 +117,34 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Cart  $cart
+     * @param  \App\Model\Cart $cart
+     * @param Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy(Cart $cart)
+    public function destroy(Cart $cart, Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'cartKey' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return \response()->json([
+                'errors' => $validator->errors(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $cartKey = $request->input('cartKey');
+
+        if($cart->key == $cartKey) {
+
+            $cart->delete();
+
+            return response()->json(null,Response::HTTP_OK);
+        }
+
+        return response()->json([
+            'data' => 'CartKey provided is incorrect'
+        ],Response::HTTP_BAD_REQUEST);
     }
 }

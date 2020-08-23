@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $fillable = ['id', 'content', 'key', 'userID'];
+    protected $fillable = ['id', 'cart_id', 'key', 'userID'];
 
     public $incrementing = false;
 
     public function items()
     {
-
-        return $this->hasMany('App\CartItem','Cart_id');
+        return $this->hasMany('App\Model\CartItem','cart_id');
     }
 }
