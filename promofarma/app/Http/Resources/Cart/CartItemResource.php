@@ -15,16 +15,13 @@ class CartItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        $product = Product::all();
+        $product = Product::find();
 
         return [
             'name' => $product['name'],
             'description' => $product->detail,
             'price' => $product->price,
             'discount' => $product->discount,
-            'stock' => $product->isOutOfStock(),
-            'finalPrice' => $product->priceWithDiscountApplied(),
-            'rating' => $product->averageRating(),
             'href' => [
                 'reviews' => route('reviews.index', $product->id)
             ]

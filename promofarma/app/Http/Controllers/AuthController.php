@@ -8,6 +8,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
+    /**
+     * Create New User
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function signup(Request $request)
     {
         $request->validate([
@@ -27,5 +33,21 @@ class AuthController extends Controller
         return response()->json([
             'data' => 'Successfully created user'
         ], Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function login(Request $request)
+    {
+        // TODO
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function logout(Request $request)
+    {
+        // TODO
     }
 }

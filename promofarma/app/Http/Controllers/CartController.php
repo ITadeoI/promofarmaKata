@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Cart\CartItemCollection;
-use App\Http\Resources\Cart\CartItemResource;
 use App\Model\Cart;
+use App\Model\CartItem;
+use App\Model\Product;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,27 +15,7 @@ use Illuminate\Support\Facades\Validator;
 class CartController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created Cart in storage and return the data.
+     * Create a new Cart
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -58,9 +40,10 @@ class CartController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Cart shown with its products
      *
-     * @param  \App\Model\Cart  $cart
+     * @param  \App\Model\Cart $cart
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function show(Cart $cart, Request $request)
@@ -92,34 +75,11 @@ class CartController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * Remove Cart resource from storage.
      *
      * @param  \App\Model\Cart $cart
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function destroy(Cart $cart, Request $request)
@@ -129,7 +89,7 @@ class CartController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return \response()->json([
+            return response()->json([
                 'errors' => $validator->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
@@ -147,4 +107,69 @@ class CartController extends Controller
             'data' => 'CartKey provided is incorrect'
         ],Response::HTTP_BAD_REQUEST);
     }
+
+    /**
+     * Add Product inside the Cart
+     *
+     * @param Cart $cart
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addProducts(Cart $cart, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'cartKey' => 'required',
+            'productID' => 'required',
+            'quantity' => 'required|numeric|min:1'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $cartKey = $request->input('cartKey');
+        $productID = $request->input('productID');
+        $quantity = $request->input('quantity');
+
+        if ($cart->key == $cartKey) {
+            // Product exist or 404 not found
+            try {$product = Product::findOrFail($productID);} catch (ModelNotFoundException $e) {
+                return response()->json([
+                    'data' => 'The Product you are trying to add does not exits'
+                ], Response::HTTP_NOT_FOUND);
+            }
+
+            $cartItem = CartItem::where([
+                    'cart_id' => $cart->getKey(),
+                    'product_id' => $productID]
+            )->first();
+
+            // Product exist in the cart within true update quantity but create a new one
+            if ($cartItem) {
+                $cartItem->quantity = $quantity;
+                CartItem::where([
+                        'cart_id' => $cart->getKey(),
+                        'product_id' => $productID]
+                )->update(['quantity' => $quantity]);
+            } else {
+                CartItem::create([
+                    'cart_id' => $cart->getKey(),
+                    'product_id' => $productID,
+                    'quantity' => $quantity
+                ]);
+            }
+
+            return response()->json([
+                'data' => 'Cart was updated with the given product successfully'
+            ], Response::HTTP_OK);
+        }
+
+        return response()->json([
+            'data' => 'Cartkey provided is incorrect'
+        ]);
+    }
+
+
 }
