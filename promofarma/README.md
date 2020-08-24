@@ -78,6 +78,16 @@ php artisan passport:install
 - Also, By terminal you can type php artisan route:list you will see all of them more clearly.
  <p align="center"><img src="http://imgfz.com/i/8XODaG5.png" width="700"></p>
  
+## How to Run Test
+
+- Inside Promofarma directory:
+```bash
+php artisan test
+``` 
+- you will see something like this:
+
+ <p align="center"><img src="https://i.ibb.co/FbsZL6S/Selection-070.png" width="400"></p>
+ 
 ## Built With
 
   * [GitLab](https://gitlab.com/) - DevOps platform,
