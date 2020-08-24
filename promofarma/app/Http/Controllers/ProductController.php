@@ -58,6 +58,8 @@ class ProductController extends Controller
 
         $product->discount = $request->discount;
 
+        $product->user_id = $request->user_id;
+
         $product->save();
 
         return response([
