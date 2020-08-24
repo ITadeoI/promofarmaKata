@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "b668ab07-2f12-4110-a87f-b99247a34f23",
+		"name": "OAuth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AccessToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"grant_type\" : \"password\",\n\t\"client_id\" : \"2\",\n\t\"client_secret\" : \"S1PGQbY7EiSSLkZ6PwnEGEw3bU27h9wLizNXaE5F\",\n\t\"username\" : \"gunnar97@example.net\",\n\t\"password\" : \"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserCreate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZDFiOTdiYWJlM2NkOGIzNmEzYzI0MTQyN2IwMWIzZTBjYzE2OTJlZGE1ZGQyYzI2MGZlYjA1Mjk2M2ZjYTYyNzhkOGQ1NDdiZWNlNWU0YzEiLCJpYXQiOjE1OTgwOTU0NTYsIm5iZiI6MTU5ODA5NTQ1NiwiZXhwIjoxNjI5NjMxNDU2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.GiXQ62myVJ3lgB1ljY8RP-GNq00G65ym_N0kIkx8jOIBzREEtjNqbzZ2nfw9WRSlpxTn1GlMQY155gEbG8fJgU6WsPNumQKJ8SvaPwD7AbPZGZgGGhPz_ixBoyWi4H2XlkD91rqoi9sDmfDWmW0zksqckauzWaNtRxAB7YuuUNqm-bRQosHeId3IYsJr6GFEn5aYSVr0WFhC694OK_cV9sxRUjikegr_XvUSuVrfdj-2OK0zab1YbyknwDIPJIUZC7NpEc8NiEG13UUqaewP6c6iiSwKjzumNPTAuxQTj18dFj6hSAFDIGm_-Cm6ZQlS__gedduq8DDCnend7lNnZ1HBILu7j7nABwQfhgYbjjLCSuTuHT0K6jsmoEcj-57UQvV8epdYUZnwVpOUNYw1dEmxz6OYaTikPT3CCw7QMnVLWoPSt4A3WSlsknT-CgrCDBXE-KwwukYpTH8GxfXtPw_L6EtE2xebUIWlbl5lCC-ZqrdXW1tu84ayXxxXy3VTeYVeAz8h_1KsnZMr2PsZZn7VhJQOjsLwQ0FFbbV_BhUUOelJ9oFAkUnLbRCkrksXVxILA5jgyA8dFQ2m393gv0e09t2RQ2KVRCbulORK3njtSD9sgm1Ydp2Y6dUY-BEz8LxEqcpJIvMQr_UmTJTJINWSbHx2Bgdm3CDWlJZftiM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" :\"alice\",\n\t\"email\" : \"alice@wonderland.com\",\n\t\"password\" :\"secret\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,28 +1,95 @@
-# Challenge_
-Promofarma Code Challenge
-Promofarma Shopping Cart & Orders
-Promofarma is a marketplace that operates with different sellers that offer their products to be sold from Promofarma. 
-This implies that a product can be sold by one or several sellers at different prices. 
-Therefore, in our system we have to trace the selection of the product-seller once the user adds a product to the Shopping Cart and once the transaction ends.
+# Kata Promofarma - Shopping Cart
+<p align="center"><img src="http://imgfz.com/i/Yt2gIPA.jpeg" width="600"></p>
+
+
+### Challenge
+Promofarma is a marketplace that operates with different sellers that offer their products to be sold from Promofarma. This implies that a product can be sold by one or several sellers at different prices. Therefore, in our system we have to trace the selection of the product-seller once the user adds a product to the Shopping Cart and once the transaction ends.
+
 ## Implement Shopping Cart API:
-- Add/Delete Seller
-- Add/Delete Products linked to Seller
-- Add/Delete products  to cart
-- Get the total amount of the cart.
-- Increase / Decrease the number of units of a product (0 means deleted).
-- Remove a product from the cart
+- User is Unique
+- Add & Delete Seller
+- Add & Delete Products linked to Seller
+- Add & Delete products to cart
 - Delete the entire cart
-- Confirm Cart -> commit to buy.
+- Increase & Decrease the number of units of a product (0 means deleted)
+- Get the total amount of the cart
+- Remove a product from the cart
+- Confirm Cart (commit to buy)
+
 ## Example Workflow:
-Elaborate a working set of example requests to fulfill a full buying process. User is Unique.
-Do not forget Readme with a working example and environment setup.
-Take care along the developing process (commits).
+Elaborate a working set of example requests to fulfill a full buying process. User is Unique. Do not forget Readme with a working example and environment setup. Take care along the developing process (commits).
+
 ## Delivery
-Right here!!!
-Estimated completion time: 1 day.
-The implementation of the exercise is free.
-The details of implementation and the approach taken will be evaluated.
-It is not necessary to develop a graphical interface.
-The test will be discussed together in the offices of Promofarma
-Enjoy Coding!
-When you are done pls ping me here: alex.garcia@promocionesfarma.com
+Right here!!! Estimated completion time: 1 day. The implementation of the exercise is free. The details of implementation and the approach taken will be evaluated. It is not necessary to develop a graphical interface. The test will be discussed together in the offices of Promofarma Enjoy Coding! When you are done pls ping me here: alex.garcia@promocionesfarma.com
+
+## Installing and starting the application
+
+#### How to install
+- 1.Clone the repository  
+```bash
+git clone https://gitlab.com/alex.garcia1/alejandro.tadeo.git
+```
+- 2.From Laradock Directory
+```bash
+sudo docker-compose up -d nginx mysql
+```
+- 3.Inside Laradock directory: this command shows you the containers status.
+```bash
+docker ps
+```
+You should see the container running, it looks like this:
+<p align="center"><img src="http://imgfz.com/i/B2MTo54.png" width="700"></p>
+
+- 4.From Promofarma directory: 
+
+```bash
+php artisan serve
+```
+
+Now, go the browser an text: localhost:8000
+<p align="center"><img src="http://imgfz.com/i/I25uqYU.png" width="700"></p>
+
+- 5.Fist of all to use the application, the aplication needs to be seeder correctly the database:
+
+```bash
+php artisan migrate:refresh
+```
+- 6.After create all the table, this command trigger fake data with factories.
+
+```bash
+php artisan db:seed
+```
+- 7.Then, the application needs to generate the Laravel Password Grant
+
+```bash
+php artisan passport:install
+``` 
+- 8.I strongly recommend you to use Postman(import the file oauth & shopping cart), to generate the token. 
+
+<p align="center"><img src="http://imgfz.com/i/cGFTEf7.png" width="700"></p>
+
+- 9.Substitute the client_secret with the password grant generated above on the variable {auth} in Postman.
+
+<p align="center"><img src="http://imgfz.com/i/q7sjMke.png" width="700"></p>
+
+- 10.That's all! enjoy my solution to the Promofarma's Kata
+
+## API Documentation
+
+**[Postman](https://www.postman.com/)** 
+ - Example using postman: [ShoppingCart - PromofarmaKata.postman_collection.json]
+ 
+ <p align="center"><img src="http://imgfz.com/i/IRMiUjm.png" width="700"></p>
+ 
+- Also, By terminal you can type php artisan route:list you will see all of them more clearly.
+ <p align="center"><img src="http://imgfz.com/i/8XODaG5.png" width="700"></p>
+ 
+## Built With
+
+  * [GitLab](https://gitlab.com/) - DevOps platform,
+  * [Laravel](https://laravel.com/) - Web Application Framework
+  * [Laradock](https://laradock.io/) - PHP development environment for Docker
+  * [Composer](https://getcomposer.org/doc/) - Dependency management
+  * [Docker](https://docs.docker.com/) - OS-level virtualization (PaaS)
+  * [Postman](https://www.getpostman.com/) - API Client for testing 
+  
