@@ -1,0 +1,691 @@
+{
+	"info": {
+		"_postman_id": "72421f31-a8e8-4f1d-9afb-db47316d8b46",
+		"name": "ShoppingCart - PromofarmaKata",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OAuth",
+			"item": [
+				{
+					"name": "AccessToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"grant_type\" : \"password\",\n\t\"client_id\" : \"2\",\n\t\"client_secret\" : \"23UcWK1JwF3sjdLT83gremDvhY8oIca8mGxxcfC6\",\n\t\"username\" : \"wilhelmine48@example.com\",\n\t\"password\" : \"password\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/oauth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZDFiOTdiYWJlM2NkOGIzNmEzYzI0MTQyN2IwMWIzZTBjYzE2OTJlZGE1ZGQyYzI2MGZlYjA1Mjk2M2ZjYTYyNzhkOGQ1NDdiZWNlNWU0YzEiLCJpYXQiOjE1OTgwOTU0NTYsIm5iZiI6MTU5ODA5NTQ1NiwiZXhwIjoxNjI5NjMxNDU2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.GiXQ62myVJ3lgB1ljY8RP-GNq00G65ym_N0kIkx8jOIBzREEtjNqbzZ2nfw9WRSlpxTn1GlMQY155gEbG8fJgU6WsPNumQKJ8SvaPwD7AbPZGZgGGhPz_ixBoyWi4H2XlkD91rqoi9sDmfDWmW0zksqckauzWaNtRxAB7YuuUNqm-bRQosHeId3IYsJr6GFEn5aYSVr0WFhC694OK_cV9sxRUjikegr_XvUSuVrfdj-2OK0zab1YbyknwDIPJIUZC7NpEc8NiEG13UUqaewP6c6iiSwKjzumNPTAuxQTj18dFj6hSAFDIGm_-Cm6ZQlS__gedduq8DDCnend7lNnZ1HBILu7j7nABwQfhgYbjjLCSuTuHT0K6jsmoEcj-57UQvV8epdYUZnwVpOUNYw1dEmxz6OYaTikPT3CCw7QMnVLWoPSt4A3WSlsknT-CgrCDBXE-KwwukYpTH8GxfXtPw_L6EtE2xebUIWlbl5lCC-ZqrdXW1tu84ayXxxXy3VTeYVeAz8h_1KsnZMr2PsZZn7VhJQOjsLwQ0FFbbV_BhUUOelJ9oFAkUnLbRCkrksXVxILA5jgyA8dFQ2m393gv0e09t2RQ2KVRCbulORK3njtSD9sgm1Ydp2Y6dUY-BEz8LxEqcpJIvMQr_UmTJTJINWSbHx2Bgdm3CDWlJZftiM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" :\"alice\",\n\t\"email\" : \"alice@wonderland.com\",\n\t\"password\" :\"secret\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShowUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "ProductsAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZDFiOTdiYWJlM2NkOGIzNmEzYzI0MTQyN2IwMWIzZTBjYzE2OTJlZGE1ZGQyYzI2MGZlYjA1Mjk2M2ZjYTYyNzhkOGQ1NDdiZWNlNWU0YzEiLCJpYXQiOjE1OTgwOTU0NTYsIm5iZiI6MTU5ODA5NTQ1NiwiZXhwIjoxNjI5NjMxNDU2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.GiXQ62myVJ3lgB1ljY8RP-GNq00G65ym_N0kIkx8jOIBzREEtjNqbzZ2nfw9WRSlpxTn1GlMQY155gEbG8fJgU6WsPNumQKJ8SvaPwD7AbPZGZgGGhPz_ixBoyWi4H2XlkD91rqoi9sDmfDWmW0zksqckauzWaNtRxAB7YuuUNqm-bRQosHeId3IYsJr6GFEn5aYSVr0WFhC694OK_cV9sxRUjikegr_XvUSuVrfdj-2OK0zab1YbyknwDIPJIUZC7NpEc8NiEG13UUqaewP6c6iiSwKjzumNPTAuxQTj18dFj6hSAFDIGm_-Cm6ZQlS__gedduq8DDCnend7lNnZ1HBILu7j7nABwQfhgYbjjLCSuTuHT0K6jsmoEcj-57UQvV8epdYUZnwVpOUNYw1dEmxz6OYaTikPT3CCw7QMnVLWoPSt4A3WSlsknT-CgrCDBXE-KwwukYpTH8GxfXtPw_L6EtE2xebUIWlbl5lCC-ZqrdXW1tu84ayXxxXy3VTeYVeAz8h_1KsnZMr2PsZZn7VhJQOjsLwQ0FFbbV_BhUUOelJ9oFAkUnLbRCkrksXVxILA5jgyA8dFQ2m393gv0e09t2RQ2KVRCbulORK3njtSD9sgm1Ydp2Y6dUY-BEz8LxEqcpJIvMQr_UmTJTJINWSbHx2Bgdm3CDWlJZftiM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductByID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Postquam Antiarrugas intensivo - New2\",\n\t\"description\" : \"Postquam sérum biológico con ácido hialurónico 30ml\",\n\t\"price\" : \"22\",\n\t\"stock\" : \"6\",\n\t\"discount\" : \"50\",\n\t\"user_id\" : \"1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Postquam Antiarrugas intensivo - Updated\",\n\t\"description\" : \"Postquam sérum biológico con ácido hialurónico 30ml\",\n\t\"stock\" : \"5\",\n\t\"price\" : \"22\",\n\t\"discount\" : \"50\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"27"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "ReviewsAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/5/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"5",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewsByProductID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/38/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"38",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"customer\" : \"promofarma\",\n\t\"star\" : 4,\n\t\"review\" : \"this kata is awfull...because where is your fucking DDD AND TDD I_I\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/38/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"38",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"customer\" : \"PROMO\",\n\t\"star\" : 4,\n\t\"review\" : \"asdasdasdaaaaaaaaaaaaaaaaaaaasdasda\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/38/reviews/34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"38",
+								"reviews",
+								"34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/products/38/reviews/34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"38",
+								"reviews",
+								"34"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "CartByCartID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8000/api/carts/3?cartKey=a683a8640a29a3501256fb58e64661f2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carts",
+								"3"
+							],
+							"query": [
+								{
+									"key": "cartKey",
+									"value": "a683a8640a29a3501256fb58e64661f2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cartKey\" : \"a683a8640a29a3501256fb58e64661f2\",\n\t\"productID\" : \"5\",\n\t\"quantity\" : \"1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/carts/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carts",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CartCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/carts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CartDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZDFiOTdiYWJlM2NkOGIzNmEzYzI0MTQyN2IwMWIzZTBjYzE2OTJlZGE1ZGQyYzI2MGZlYjA1Mjk2M2ZjYTYyNzhkOGQ1NDdiZWNlNWU0YzEiLCJpYXQiOjE1OTgwOTU0NTYsIm5iZiI6MTU5ODA5NTQ1NiwiZXhwIjoxNjI5NjMxNDU2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.GiXQ62myVJ3lgB1ljY8RP-GNq00G65ym_N0kIkx8jOIBzREEtjNqbzZ2nfw9WRSlpxTn1GlMQY155gEbG8fJgU6WsPNumQKJ8SvaPwD7AbPZGZgGGhPz_ixBoyWi4H2XlkD91rqoi9sDmfDWmW0zksqckauzWaNtRxAB7YuuUNqm-bRQosHeId3IYsJr6GFEn5aYSVr0WFhC694OK_cV9sxRUjikegr_XvUSuVrfdj-2OK0zab1YbyknwDIPJIUZC7NpEc8NiEG13UUqaewP6c6iiSwKjzumNPTAuxQTj18dFj6hSAFDIGm_-Cm6ZQlS__gedduq8DDCnend7lNnZ1HBILu7j7nABwQfhgYbjjLCSuTuHT0K6jsmoEcj-57UQvV8epdYUZnwVpOUNYw1dEmxz6OYaTikPT3CCw7QMnVLWoPSt4A3WSlsknT-CgrCDBXE-KwwukYpTH8GxfXtPw_L6EtE2xebUIWlbl5lCC-ZqrdXW1tu84ayXxxXy3VTeYVeAz8h_1KsnZMr2PsZZn7VhJQOjsLwQ0FFbbV_BhUUOelJ9oFAkUnLbRCkrksXVxILA5jgyA8dFQ2m393gv0e09t2RQ2KVRCbulORK3njtSD9sgm1Ydp2Y6dUY-BEz8LxEqcpJIvMQr_UmTJTJINWSbHx2Bgdm3CDWlJZftiM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cartKey\" : \"6553147e882693a94c7c242d1ee2b468\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/carts/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"carts",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

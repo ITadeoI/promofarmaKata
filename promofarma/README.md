@@ -16,12 +16,6 @@ Promofarma is a marketplace that operates with different sellers that offer thei
 - Remove a product from the cart
 - Confirm Cart (commit to buy)
 
-## Example Workflow:
-Elaborate a working set of example requests to fulfill a full buying process. User is Unique. Do not forget Readme with a working example and environment setup. Take care along the developing process (commits).
-
-## Delivery
-Right here!!! Estimated completion time: 1 day. The implementation of the exercise is free. The details of implementation and the approach taken will be evaluated. It is not necessary to develop a graphical interface. The test will be discussed together in the offices of Promofarma Enjoy Coding! When you are done pls ping me here: alex.garcia@promocionesfarma.com
-
 ## Installing and starting the application
 
 #### How to install
@@ -68,7 +62,7 @@ php artisan passport:install
 
 <p align="center"><img src="http://imgfz.com/i/cGFTEf7.png" width="700"></p>
 
-- 9.Substitute the client_secret with the password grant generated above on the variable {auth} in Postman.
+- 9.Substitute the client_secret with the password grant generated above on the variable {{auth}} in Postman.
 
 <p align="center"><img src="http://imgfz.com/i/q7sjMke.png" width="700"></p>
 
@@ -77,9 +71,9 @@ php artisan passport:install
 ## API Documentation
 
 **[Postman](https://www.postman.com/)** 
- - Example using postman: [ShoppingCart - PromofarmaKata.postman_collection.json]
+ - Example using postman: [ShoppingCart_Promofarma_Kata.postman_collection.json]
  
- <p align="center"><img src="http://imgfz.com/i/IRMiUjm.png" width="700"></p>
+ <p align="center"><img src="https://i.ibb.co/NpkC6B7/Selection-069.png" width="700"></p>
  
 - Also, By terminal you can type php artisan route:list you will see all of them more clearly.
  <p align="center"><img src="http://imgfz.com/i/8XODaG5.png" width="700"></p>
